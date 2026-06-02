@@ -12,6 +12,20 @@ A full-stack RAG (Retrieval-Augmented Generation) document assistant built with 
 * Question answering over uploaded documents
 * Docker deployment
 
+## Screenshots
+
+### Upload Interface
+
+![Upload Interface](screenshots/upload-page.png)
+
+### Chat Interface
+
+![Chat Interface](screenshots/chat-example.png)
+
+### API Documentation
+
+![API Documentation](screenshots/swagger-api.png)
+
 ## Tech Stack
 
 ### Backend
