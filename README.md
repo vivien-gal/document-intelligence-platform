@@ -1,6 +1,59 @@
-# PDF Vector MVP
+# Document Intelligence Platform
 
-A minimal full-stack app to **upload PDFs**, **extract text**, **generate embeddings locally**, **store them on disk**, and **chat** over your documents. No cloud API keys required.
+A full-stack RAG (Retrieval-Augmented Generation) document assistant built with FastAPI, React, Docker and local sentence-transformer embeddings.
+
+## Features
+
+* PDF upload and indexing
+* Local embeddings (Sentence Transformers)
+* Semantic document search
+* Source attribution
+* Document deletion
+* Question answering over uploaded documents
+* Docker deployment
+
+## Tech Stack
+
+### Backend
+
+* FastAPI
+* SQLAlchemy
+* SQLite
+* Sentence Transformers
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+
+### Infrastructure
+
+* Docker
+* Docker Compose
+
+## Architecture
+
+PDF → Text Extraction → Chunking → Embeddings → SQLite Storage
+
+User Question → Embedding → Semantic Search → Answer Extraction → Sources
+
+## Example Questions
+
+* What is the project budget?
+* Who is the project manager?
+* What are the project risks?
+* When does the contract expire?
+
+## Future Improvements
+
+* OpenAI / Claude integration
+* Vector database support (pgvector)
+* OCR support for scanned PDFs
+* n8n workflow integration
+* Multi-user authentication
+
 
 ## What it does
 
