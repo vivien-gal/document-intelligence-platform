@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////app/data/app.db
+      DATA_DIR: /app/data
+    volumes:
+      - app-data:/app/data
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: /api
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+volumes:
+  app-data:

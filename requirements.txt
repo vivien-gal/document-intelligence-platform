@@ -1,0 +1,9 @@
+# API dependencies (no PyTorch — install CPU torch first; see Dockerfile / README)
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+sqlalchemy==2.0.36
+pydantic-settings==2.6.1
+python-multipart==0.0.17
+pypdf==5.1.0
+python-dotenv==1.0.1
+numpy==2.2.1

@@ -1,0 +1,2 @@
+# ML dependencies — requires CPU torch installed before this file
+sentence-transformers==3.3.1
