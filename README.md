@@ -46,13 +46,6 @@ User Question → Embedding → Semantic Search → Answer Extraction → Source
 * What are the project risks?
 * When does the contract expire?
 
-## Future Improvements
-
-* OpenAI / Claude integration
-* Vector database support (pgvector)
-* OCR support for scanned PDFs
-* n8n workflow integration
-* Multi-user authentication
 
 
 ## What it does
@@ -119,7 +112,7 @@ Search uses in-memory cosine similarity over stored vectors. This is simple and 
 ## Project structure
 
 ```
-pdf-vector-api/
+document-intelligence-platform/
 ├── app/
 │   ├── main.py
 │   ├── config.py
@@ -279,6 +272,14 @@ This keeps the MVP simple, private, and free to run. You can add an LLM layer la
 | "No extractable text" | PDF may be scanned images — OCR not included |
 | Chat returns nothing | Upload at least one PDF with readable text first |
 | Port in use | Change ports in `docker-compose.yml` |
+
+## Future Improvements
+
+* OpenAI / Claude integration
+* Vector database support (pgvector)
+* OCR support for scanned PDFs
+* n8n workflow integration
+* Multi-user authentication
 
 ## License
 
