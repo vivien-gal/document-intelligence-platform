@@ -69,6 +69,7 @@ User Question → Embedding → Semantic Search → Answer Extraction → Source
 3. **Embed** — vectors via [sentence-transformers](https://www.sbert.net/) (`all-MiniLM-L6-v2`, runs on your machine)
 4. **Store** — SQLite database + JSON embeddings in `./data/` (Docker volume `app-data`)
 5. **Chat** — ask questions; the API finds similar chunks and returns an answer with sources
+6. **AI Project Analyst** — rule-based structured analysis across all uploaded documents
 
 ## Architecture
 
@@ -135,12 +136,14 @@ document-intelligence-platform/
 │   ├── schemas.py
 │   ├── routers/
 │   │   ├── documents.py    # upload, list, search
-│   │   └── chat.py         # POST /chat
+│   │   ├── chat.py         # POST /chat
+│   │   └── agent.py        # POST /agent/project-analysis
 │   └── services/
 │       ├── pdf.py
 │       ├── embeddings.py   # local model
 │       ├── search.py
-│       └── chat.py
+│       ├── chat.py
+│       └── project_analysis.py
 ├── frontend/               # React UI
 ├── data/                   # created at runtime (gitignored)
 │   └── app.db
@@ -229,6 +232,7 @@ UI: http://localhost:5173 (proxies `/api` → http://localhost:8000)
 | `DELETE` | `/documents/{id}` | Delete document and its chunks |
 | `POST` | `/documents/search` | Semantic search |
 | `POST` | `/chat` | Chat with documents |
+| `POST` | `/agent/project-analysis` | Structured project analysis (rule-based) |
 
 ### Examples
 
@@ -252,12 +256,44 @@ Delete document:
 curl -X DELETE http://localhost:8000/documents/1
 ```
 
+Project analysis:
+
+```bash
+curl -X POST http://localhost:8000/agent/project-analysis
+```
+
+Example response:
+
+```json
+{
+  "project_summary": "Projekt neve: Marina Residence AI Dashboard",
+  "key_dates": ["Határidő: 2026. szeptember 30."],
+  "budget_information": ["Költségkeret: 18 500 000 Ft"],
+  "risks": ["Késhet az Oracle APEX integráció"],
+  "open_tasks": ["API kapcsolat kialakítása a Monday.com rendszerrel"],
+  "stakeholders": ["Projektvezető: Kovács Anna"],
+  "source_documents": ["Teszt Projekt Dokumentáció.pdf"]
+}
+```
+
+## AI Project Analyst Agent
+
+The **Project Analyst** is an agent-style feature built on your existing stack (no OpenAI or external APIs):
+
+1. Loads all uploaded document chunks from SQLite.
+2. Runs semantic search for analysis-focused queries (dates, budget, risks, tasks, stakeholders).
+3. Extracts structured fields and lists with rule-based Hungarian/English pattern matching.
+4. Returns JSON sections; missing data uses empty lists or `"Not found"` for the summary.
+
+Open the UI at http://localhost:3000/analyst (or http://localhost:5173/analyst in dev) and click **Generate Project Analysis**.
+
 ## Frontend pages
 
 | Route | Page |
 |-------|------|
 | `/` | Upload PDFs, view indexed files |
 | `/chat` | Ask questions about uploaded documents |
+| `/analyst` | AI Project Analyst — structured analysis cards |
 
 ## How chat works
 

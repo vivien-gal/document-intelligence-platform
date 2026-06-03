@@ -43,3 +43,13 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     answer: str
     sources: list[SearchResult]
+
+
+class ProjectAnalysisResponse(BaseModel):
+    project_summary: str
+    key_dates: list[str]
+    budget_information: list[str]
+    risks: list[str]
+    open_tasks: list[str]
+    stakeholders: list[str]
+    source_documents: list[str]

@@ -24,6 +24,16 @@ export interface DeleteDocumentResponse {
   document_id: number;
 }
 
+export interface ProjectAnalysis {
+  project_summary: string;
+  key_dates: string[];
+  budget_information: string[];
+  risks: string[];
+  open_tasks: string[];
+  stakeholders: string[];
+  source_documents: string[];
+}
+
 export interface ChatMessage {
   id: string;
   role: "user" | "assistant";

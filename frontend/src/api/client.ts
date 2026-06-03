@@ -1,4 +1,9 @@
-import type { ChatResponse, DeleteDocumentResponse, Document } from "../types";
+import type {
+  ChatResponse,
+  DeleteDocumentResponse,
+  Document,
+  ProjectAnalysis,
+} from "../types";
 
 const baseUrl = import.meta.env.VITE_API_URL ?? "/api";
 
@@ -35,6 +40,12 @@ export async function uploadDocument(file: File): Promise<Document> {
 export function deleteDocument(documentId: number): Promise<DeleteDocumentResponse> {
   return request<DeleteDocumentResponse>(`/documents/${documentId}`, {
     method: "DELETE",
+  });
+}
+
+export function generateProjectAnalysis(): Promise<ProjectAnalysis> {
+  return request<ProjectAnalysis>("/agent/project-analysis", {
+    method: "POST",
   });
 }
 

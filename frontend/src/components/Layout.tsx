@@ -25,6 +25,9 @@ export function Layout() {
           <NavLink to="/chat" className={navClass}>
             Chat
           </NavLink>
+          <NavLink to="/analyst" className={navClass}>
+            Project Analyst
+          </NavLink>
         </nav>
       </aside>
       <main className="flex flex-1 flex-col overflow-hidden">
